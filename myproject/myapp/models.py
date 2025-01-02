@@ -42,7 +42,7 @@ class Osoba(models.Model):
         MEZCZYZNA = 2, 'Mężczyzna'
         INNA = 3, 'Inna'
 
-    data_dodania = models.DateField(default=timezone.now, auto_now_add=True)
+    data_dodania = models.DateField(auto_now_add=True)
 
     imie = models.CharField(max_length=50, null=False, blank=False)
     nazwisko = models.CharField(max_length=50, null=False, blank=False)
