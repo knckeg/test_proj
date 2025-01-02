@@ -1,5 +1,6 @@
 from django.db import models
 
+
 MONTHS = models.IntegerChoices('Miesiace', 'Styczeń Luty Marzec Kwiecień Maj Czerwiec Lipiec Sierpień Wrzesień Październik Listopad Grudzień')
 
 SHIRT_SIZES = (
@@ -36,15 +37,16 @@ class Stanowisko(models.Model):
         return self.nazwa
 
 class Osoba(models.Model):
-    PLEC_CHOICES = [
-        ('kobieta', 'Kobieta'),
-        ('mezczyzna', 'Mężczyzna'),
-        ('inne', 'Inne'),
-    ]
+    class Plec(models.IntegerChoices):
+        KOBIETA = 1, 'Kobieta'
+        MEZCZYZNA = 2, 'Mężczyzna'
+        INNA = 3, 'Inna'
+
+    data_dodania = models.DateField(auto_now_add=True)
 
     imie = models.CharField(max_length=50, null=False, blank=False)
     nazwisko = models.CharField(max_length=50, null=False, blank=False)
-    plec = models.CharField(max_length=10, choices=PLEC_CHOICES, null=False, blank=False)
+    plec = models.IntegerField(choices=Plec.choices, null=False, blank=False)
     stanowisko = models.ForeignKey(Stanowisko, on_delete=models.CASCADE, related_name='osoby')
 
     def __str__(self):
