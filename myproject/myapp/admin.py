@@ -1,14 +1,12 @@
 from django.contrib import admin
 from .models import Team, Person, Stanowisko, Osoba
 
-# Register the Team model
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'country')
     search_fields = ('name', 'country')
 
 admin.site.register(Team, TeamAdmin)
 
-# Register the Person model
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('name', 'shirt_size', 'month_added', 'team')
     list_filter = ('shirt_size', 'month_added', 'team')
@@ -16,19 +14,22 @@ class PersonAdmin(admin.ModelAdmin):
 
 admin.site.register(Person, PersonAdmin)
 
-# Register the Stanowisko model
 class StanowiskoAdmin(admin.ModelAdmin):
     list_display = ('nazwa', 'opis')
+    list_filter = ('nazwa',)
     search_fields = ('nazwa',)
 
 admin.site.register(Stanowisko, StanowiskoAdmin)
 
-# Register the Osoba model
 class OsobaAdmin(admin.ModelAdmin):
-    list_display = ('imie', 'nazwisko', 'plec', 'stanowisko', 'data_dodania')
-    list_filter = ('plec', 'stanowisko')
+    list_display = ('imie', 'nazwisko', 'plec', 'stanowisko_display', 'data_dodania')
+    list_filter = ('stanowisko', 'data_dodania')
     search_fields = ('imie', 'nazwisko')
     readonly_fields = ('data_dodania',)
+    ordering = ['nazwisko']
 
-# Ensure Osoba is registered only once
+    @admin.display(description='Stanowisko')
+    def stanowisko_display(self, obj):
+        return f"{obj.stanowisko.nazwa} ({obj.stanowisko.id})"
+
 admin.site.register(Osoba, OsobaAdmin)
