@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from rest_framework.routers import DefaultRouter
-from .views import OsobaViewSet, StanowiskoViewSet
+from myapp.views import OsobaViewSet, StanowiskoViewSet
 
 router = DefaultRouter()
 router.register(r'osoby', OsobaViewSet)
