@@ -19,6 +19,7 @@ from django.urls import path, include
 
 from rest_framework.routers import DefaultRouter
 from myapp.views import OsobaViewSet, StanowiskoViewSet
+from myapp.views import OsobaAPIView
 
 router = DefaultRouter()
 router.register(r'osoby', OsobaViewSet)
@@ -27,4 +28,7 @@ router.register(r'stanowiska', StanowiskoViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/osoby/', OsobaAPIView.as_view(), name='osoba-list'),
+    path('api/osoby/<int:pk>/', OsobaAPIView.as_view(), name='osoba-detail'),
 ]
+
