@@ -33,11 +33,3 @@ class OsobaAdmin(admin.ModelAdmin):
         return f"{obj.stanowisko.nazwa} ({obj.stanowisko.id})"
 
 admin.site.register(Osoba, OsobaAdmin)
-
-@admin.register(Stanowisko)
-class StanowiskoAdmin(admin.ModelAdmin):
-    list_display = ('nazwa', 'opis')
-
-@admin.register(Osoba)
-class OsobaAdmin(admin.ModelAdmin):
-    list_display = ('imie', 'nazwisko', 'plec', 'stanowisko')
