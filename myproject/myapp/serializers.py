@@ -17,7 +17,7 @@ class OsobaSerializer(serializers.Serializer):
         """
         Tworzy nowy obiekt Osoba na podstawie danych wejściowych.
         """
-        from myapp.models import Osoba  # Zaimportuj model Osoba
+        from myapp.models import Osoba
         return Osoba.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
@@ -41,7 +41,7 @@ class StanowiskoSerializer(serializers.ModelSerializer):
         fields = ['id', 'nazwa', 'opis']
 
 class OsobaModelSerializer(serializers.ModelSerializer):
-    stanowisko = serializers.StringRelatedField()  # Wyświetla __str__() z modelu Stanowisko
+    stanowisko = serializers.StringRelatedField()
 
     class Meta:
         model = Osoba
