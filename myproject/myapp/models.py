@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import datetime
 
 MONTHS = models.IntegerChoices('Miesiace', 'Styczeń Luty Marzec Kwiecień Maj Czerwiec Lipiec Sierpień Wrzesień Październik Listopad Grudzień')
 
@@ -42,7 +43,7 @@ class Osoba(models.Model):
         MEZCZYZNA = 2, 'Mężczyzna'
         INNA = 3, 'Inna'
 
-    data_dodania = models.DateField(auto_now_add=True)
+    data_dodania = models.DateField(default=datetime.date.today)
 
     imie = models.CharField(max_length=50, null=False, blank=False)
     nazwisko = models.CharField(max_length=50, null=False, blank=False)
