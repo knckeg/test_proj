@@ -11,22 +11,27 @@ class OsobaSerializer(serializers.Serializer):
         (2, 'Mężczyzna'),
         (3, 'Inna'),
     ])
-    stanowisko = serializers.CharField(source='stanowisko.nazwa', read_only=True)
+    stanowisko = serializers.PrimaryKeyRelatedField(queryset=Stanowisko.objects.all(), required=False)
 
     def create(self, validated_data):
         """
         Tworzy nowy obiekt Osoba na podstawie danych wejściowych.
         """
-        from myapp.models import Osoba
-        return Osoba.objects.create(**validated_data)
+        stanowisko = validated_data.get('stanowisko')
+        osoba = Osoba.objects.create(**validated_data)
+        osoba.stanowisko = stanowisko  # Upewnij się, że przypisujesz odpowiedni obiekt stanowiska
+        osoba.save()
+        return osoba
 
     def update(self, instance, validated_data):
         """
         Aktualizuje istniejący obiekt Osoba na podstawie danych wejściowych.
         """
+        stanowisko = validated_data.get('stanowisko', instance.stanowisko)
         instance.imie = validated_data.get('imie', instance.imie)
         instance.nazwisko = validated_data.get('nazwisko', instance.nazwisko)
         instance.plec = validated_data.get('plec', instance.plec)
+        instance.stanowisko = stanowisko  # Aktualizowanie stanowiska
         instance.save()
         return instance
 
@@ -41,9 +46,8 @@ class StanowiskoSerializer(serializers.ModelSerializer):
         fields = ['id', 'nazwa', 'opis']
 
 class OsobaModelSerializer(serializers.ModelSerializer):
-    stanowisko = serializers.StringRelatedField()
+    stanowisko = serializers.PrimaryKeyRelatedField(queryset=Stanowisko.objects.all())
 
     class Meta:
         model = Osoba
         fields = ['id', 'imie', 'nazwisko', 'plec', 'data_dodania', 'stanowisko']
-
