@@ -19,7 +19,7 @@ class OsobaSerializer(serializers.Serializer):
         """
         stanowisko = validated_data.get('stanowisko')
         osoba = Osoba.objects.create(**validated_data)
-        osoba.stanowisko = stanowisko  # Upewnij się, że przypisujesz odpowiedni obiekt stanowiska
+        osoba.stanowisko = stanowisko
         osoba.save()
         return osoba
 
@@ -31,7 +31,7 @@ class OsobaSerializer(serializers.Serializer):
         instance.imie = validated_data.get('imie', instance.imie)
         instance.nazwisko = validated_data.get('nazwisko', instance.nazwisko)
         instance.plec = validated_data.get('plec', instance.plec)
-        instance.stanowisko = stanowisko  # Aktualizowanie stanowiska
+        instance.stanowisko = stanowisko
         instance.save()
         return instance
 
