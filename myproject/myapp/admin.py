@@ -25,7 +25,6 @@ class OsobaAdmin(admin.ModelAdmin):
     list_display = ('imie', 'nazwisko', 'plec', 'stanowisko_display', 'data_dodania')
     list_filter = ('stanowisko', 'data_dodania')
     search_fields = ('imie', 'nazwisko')
-    readonly_fields = ('data_dodania',)
     ordering = ['nazwisko']
 
     @admin.display(description='Stanowisko')
