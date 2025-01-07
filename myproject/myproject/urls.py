@@ -27,9 +27,9 @@ router.register(r'osoby', OsobaViewSet)
 router.register(r'stanowiska', StanowiskoViewSet)
 
 urlpatterns = [
+    path("team/<int:id>", views.team_detail),
     path("teams", views.team_list),
     path("person/<int:id>", views.person_detail),
-    path("welcome", views.welcome_view),
     path("persons", views.person_list),
     path('myapp/', include('myapp.urls')),
     path("welcome", views.welcome_view),

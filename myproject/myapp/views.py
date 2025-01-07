@@ -60,4 +60,17 @@ def welcome_view(request):
 
 def team_list(request):
     teams = Team.objects.all()
-    return HttpResponse(teams)
+    
+    return render(request,
+                  "myapp/team/list.html",
+                  {'teams': teams})
+
+def team_detail(request, id):
+    try:
+        team = Team.objects.get(id=id)
+    except Team.DoesNotExist:
+        raise Http404("Obiekt Team o podanym id nie istnieje")
+
+    return render(request,
+                  "myapp/team/detail.html",
+                  {'team': team})

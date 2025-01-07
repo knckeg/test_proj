@@ -1,0 +1,8 @@
+{% extends "myapp\base.html" %}
+
+{% block title %}{{ team.name }} {% endblock %}
+
+{% block content %}
+<p>Team: {{ team.name }} </p>
+<p>Country: {{ team.country }}</p>
+{% endblock %}

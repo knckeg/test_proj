@@ -1,0 +1,12 @@
+{% extends "myapp\base.html" %}
+
+{% block title %}Lista obiektów Team{% endblock %}
+
+{% block content %}
+Aktualnie w mojej bazie dodane są poniższe obiekty Team.
+{% for team in teams %}
+<p>Team: {{ team.name }} </p>
+<p>Country: {{ team.country}}</p>
+<hr>
+{% endfor %}
+{% endblock %}
