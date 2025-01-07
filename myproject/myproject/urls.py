@@ -20,11 +20,17 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from myapp.views import OsobaViewSet, StanowiskoViewSet
 
+from . import views
+
 router = DefaultRouter()
 router.register(r'osoby', OsobaViewSet)
 router.register(r'stanowiska', StanowiskoViewSet)
 
 urlpatterns = [
+    path("welcome", views.welcome_view),
+    path("persons", views.person_list),
+    path('myapp/', include('myapp.urls')),
+    path("welcome", views.welcome_view),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
 ]
