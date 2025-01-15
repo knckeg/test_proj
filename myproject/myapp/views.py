@@ -1,7 +1,5 @@
 from django.shortcuts import render
 
-from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,17 +10,6 @@ from rest_framework.filters import SearchFilter
 from django.http import Http404, HttpResponse
 
 import datetime
-
-def index(request):
-    return HttpResponse("Witaj w mojej aplikacji!")
-
-class OsobaList(APIView):
-    permission_classes = [IsAuthenticated] 
-
-    def get(self, request):
-        osoby = Osoba.objects.all()
-        serializer = OsobaSerializer(osoby, many=True)
-        return Response(serializer.data)
 
 class OsobaViewSet(viewsets.ModelViewSet):
     queryset = Osoba.objects.all()

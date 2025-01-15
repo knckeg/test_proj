@@ -20,14 +20,13 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from myapp.views import OsobaViewSet, StanowiskoViewSet
 
-from myapp import views
+from . import views
 
 router = DefaultRouter()
 router.register(r'osoby', OsobaViewSet)
 router.register(r'stanowiska', StanowiskoViewSet)
 
 urlpatterns = [
-    path('api-auth/', include('rest_framework.urls')),
     path("team/<int:id>", views.team_detail),
     path("teams", views.team_list),
     path("person/<int:id>", views.person_detail),
