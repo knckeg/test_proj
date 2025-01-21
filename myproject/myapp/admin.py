@@ -1,5 +1,8 @@
 from django.contrib import admin
 from .models import Team, Person, Stanowisko, Osoba
+from rest_framework.authtoken.models import Token
+
+admin.site.register(Token)
 
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'country')
