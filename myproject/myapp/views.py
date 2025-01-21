@@ -1,14 +1,11 @@
 from django.shortcuts import render
-
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Osoba, Stanowisko, Person, Team
 from .serializers import OsobaSerializer, StanowiskoSerializer
 from rest_framework.filters import SearchFilter
-
 from django.http import Http404, HttpResponse
-
 import datetime
 
 class OsobaViewSet(viewsets.ModelViewSet):
