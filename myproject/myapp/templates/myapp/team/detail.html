@@ -1,8 +1,23 @@
-{% extends "myapp\base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Szczegóły drużyny: {{ team.name }}</title>
+</head>
+<body>
+    <h1>{{ team.name }}</h1>
+    <p><strong>Opis:</strong> {{ team.description }}</p>
 
-{% block title %}{{ team.name }} {% endblock %}
+    {% if team.members.exists %}
+        <h2>Członkowie drużyny</h2>
+        <ul>
+            {% for member in team.members.all %}
+            <li>{{ member.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Brak członków w tej drużynie.</p>
+    {% endif %}
 
-{% block content %}
-<p>Team: {{ team.name }} </p>
-<p>Country: {{ team.country }}</p>
-{% endblock %}
+    <a href="{% url 'team_list' %}">Powrót do listy drużyn</a>
+</body>
+</html>

@@ -107,22 +107,12 @@ class StanowiskoViewSet(viewsets.ModelViewSet):
         return Response({"message": "Stanowisko zostało usunięte"})
 
 def person_list(request):
-    if request.user.is_authenticated:
-        persons = Osoba.objects.filter(wlasciciel=request.user)
-    else:
-        persons = Osoba.objects.none()
+    persons = Osoba.objects.all()
+    return render(request, "person/list.html", {'persons': persons})
     
-    return render(request, "myapp/person/list.html", {'persons': persons})
-
 def person_detail(request, id):
-    try:
-        person = Person.objects.get(id=id)
-    except Person.DoesNotExist:
-        raise Http404("Obiekt Person o podanym id nie istnieje")
-
-    return render(request,
-                  "myapp/person/detail.html",
-                  {'person': person})
+    person = get_object_or_404(Person, id=id)
+    return render(request, "myapp/person/detail.html", {"person": person})
 
 def welcome_view(request):
     now = datetime.datetime.now()
@@ -135,17 +125,8 @@ def welcome_view(request):
 
 def team_list(request):
     teams = Team.objects.all()
-    
-    return render(request,
-                  "myapp/team/list.html",
-                  {'teams': teams})
+    return render(request, "myapp/team/list.html", {"teams": teams})
 
 def team_detail(request, id):
-    try:
-        team = Team.objects.get(id=id)
-    except Team.DoesNotExist:
-        raise Http404("Obiekt Team o podanym id nie istnieje")
-
-    return render(request,
-                  "myapp/team/detail.html",
-                  {'team': team})
+    team = get_object_or_404(Team, id=id)
+    return render(request, "myapp/team/detail.html", {"team": team})

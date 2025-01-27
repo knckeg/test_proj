@@ -1,14 +1,24 @@
-{% extends "myapp\base.html" %}
-
-{% block title %}Lista obiektów Person{% endblock %}
-
-{% block content %}
-Aktualnie w mojej bazie dodane są poniższe obiekty Person.
-{% for person in persons %}
-<p>Person: {{ person.name }} </p>
-<p>Rozmiar koszuli: {{ person.shirt_size }}</p>
-<p>Miesiąc dodania: {{ person.month_added }}</p>
-<p>Drużyna: {{ person.team.name }}</p>
-<hr>
-{% endfor %}
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista osób</title>
+</head>
+<body>
+    <h1>Lista osób</h1>
+    
+    {% if persons %}
+        <ul>
+            {% for person in persons %}
+                <li>
+                    {{ person.imie }} {{ person.nazwisko }} (ID: {{ person.id }})
+                    <a href="{% url 'person_detail' person.id %}">Szczegóły</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Brak osób do wyświetlenia.</p>
+    {% endif %}
+</body>
+</html>

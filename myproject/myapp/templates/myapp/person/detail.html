@@ -1,10 +1,14 @@
-{% extends "myapp\base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Szczegóły osoby</title>
+</head>
+<body>
+    <h1>Szczegóły osoby</h1>
 
-{% block title %}{{ person.name }} {% endblock %}
+    <p><strong>Imię:</strong> {{ person.name }}</p>
+    <p><strong>Wiek:</strong> {{ person.age }}</p>
 
-{% block content %}
-<p>Person: {{ person.name }}</p>
-<p>Rozmiar koszuli: {{ person.shirt_size }}</p>
-<p>Miesiąc dodania: {{ person.month_added }}</p>
-<p>Drużyna: {{ person.team.name }}</p>
-{% endblock %}
+    <a href="{% url 'person_list' %}">Powrót do listy osób</a>
+</body>
+</html>
