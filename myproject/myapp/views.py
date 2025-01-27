@@ -107,8 +107,8 @@ class StanowiskoViewSet(viewsets.ModelViewSet):
         return Response({"message": "Stanowisko zostało usunięte"})
 
 def person_list(request):
-    persons = Osoba.objects.all()
-    return render(request, "person/list.html", {'persons': persons})
+    persons = Person.objects.all()  
+    return render(request, "myapp/person/list.html", {'persons': persons})
     
 def person_detail(request, id):
     person = get_object_or_404(Person, id=id)
@@ -129,4 +129,5 @@ def team_list(request):
 
 def team_detail(request, id):
     team = get_object_or_404(Team, id=id)
-    return render(request, "myapp/team/detail.html", {"team": team})
+    members = team.members.all() 
+    return render(request, "myapp/team/detail.html", {"team": team, "members": members})

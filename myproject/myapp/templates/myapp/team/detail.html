@@ -7,11 +7,11 @@
     <h1>{{ team.name }}</h1>
     <p><strong>Opis:</strong> {{ team.description }}</p>
 
-    {% if team.members.exists %}
+    {% if members %}
         <h2>Członkowie drużyny</h2>
         <ul>
-            {% for member in team.members.all %}
-            <li>{{ member.name }}</li>
+            {% for member in members %}
+                <li>{{ member.name }}</li>
             {% endfor %}
         </ul>
     {% else %}
